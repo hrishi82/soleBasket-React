@@ -1,0 +1,25 @@
+.search-wrapper{
+    background-color: var(--search-bar-bg-clr);
+    padding: 0.3rem 0.5rem;
+    border-radius: 3rem;
+    display: flex;
+    justify-content: space-between;
+    width: fit-content;
+}
+
+.search-bar{
+    border: none;
+    background-color: transparent;
+    padding: 0.2rem 0.6rem;
+}
+.search-bar:focus{
+    outline: none;
+    background-color: transparent;
+}
+
+.search-bar-btn{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-left: auto;
+}
