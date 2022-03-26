@@ -1,0 +1,71 @@
+.sidebar-wrapper{
+    width: 15rem;
+    height: 100%;
+    background-color: var(--white-bg);
+    padding: 1rem;
+    border-radius: 0.2rem;
+}
+
+.sidebar-title-cont{
+    display: flex;
+}
+
+
+.sidebar-title{
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.sidebar-reset-btn{
+    color: black;
+    font-size: 0.8rem;
+    margin-left: auto;
+    border: none;
+    background-color: inherit;
+    cursor: pointer
+}
+
+
+.sidebar-topic{
+    margin: 1rem 0;
+    font-size: 1rem;
+}
+
+.filter-radio{
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+
+}
+
+.price-slider-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.price-slider-values{
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.price-slider{
+    width: 90%;
+}
+
+.range-slider{
+    margin: 1rem 0;
+    width: 100%;
+}
+
+.radio-label{
+    margin-left: 0.5rem;
+}
+
+.radio-container {
+    margin: 0.5rem 0;
+}
+.radio-container  > input{
+    margin: 0;
+}
