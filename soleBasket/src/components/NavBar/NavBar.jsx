@@ -1,8 +1,30 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./NavBar.css"
 import "./SearchBar.css"
+import {useData} from "../../context/dataContext"
+import {useAuth} from "../../context/authContext"
+
 
 const NavBar = () => {
+
+  const {state, dispatch} = useData()
+  const {cartlist} = state
+
+  const {token, setToken, setUser} = useAuth()
+  const navigate = useNavigate()
+
+
+  const logoutHandler = (e) =>{
+    e.preventDefault()
+    localStorage.removeItem("login")
+    setToken(null);
+    setUser(null);
+    dispatch({
+      type: "SET_CART_LIST",
+      payload: [] 
+    });
+  }
+
   return (
     <nav className="nav-wrapper">
       <nav className="nav-items-left">
@@ -31,16 +53,20 @@ const NavBar = () => {
       <Link to="/productpage" className="nav-link">
           All Products
         </Link>
-        <Link to="/" className="nav-link">
+
+        {token ? <Link to="/logoutpage" className="nav-link" onClick={(e)=>logoutHandler(e)}>
+          Logout
+        </Link>: <Link to="/loginpage" className="nav-link">
           Login
-        </Link>
+        </Link>}
+
         <Link to="/" className="nav-link relative">
           <i className="far fa-heart"></i>
           <span className="badge-w-txt">9+</span>
         </Link>
-        <Link to="/" className="nav-link relative">
+        <Link to="/cartpage" className="nav-link relative">
           <i className="far fa-shopping-cart"></i>
-          <span className="badge-w-txt">53</span>
+          {token && cartlist.length>0 && <span className="badge-w-txt">{cartlist.length}</span>}
         </Link>
       </nav>
     </nav>

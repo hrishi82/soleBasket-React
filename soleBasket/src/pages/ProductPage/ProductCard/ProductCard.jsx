@@ -1,6 +1,19 @@
 import "./productcard.css";
+import axios from "axios"
+import {useState, useEffect} from "react"
+import {useData} from "../../../context/dataContext"
+import {useAuth} from "../../../context/authContext"
+import { Link, useNavigate } from 'react-router-dom';
+import {PostCartData} from "../../../services/services"
 
 const ProductCard = ({ data }) => {
+  const [inCart, setInCart] = useState(false)
+  const [inWishlist, setInWishlist] = useState(false)
+  const navigate = useNavigate()
+
+  const {state, dispatch} = useData()
+  const {token} = useAuth();
+
   const {
     id,
     _id,
@@ -12,8 +25,50 @@ const ProductCard = ({ data }) => {
     rating,
     collection,
     size,
-    img,
+    img
   } = data;
+
+  useEffect(()=>{
+    let findItemInCart = state.cartlist.find(el=>el._id === _id);
+    if (findItemInCart){
+      setInCart(true)
+    }else{
+      setInCart(false)
+    }
+  }, [state.cartlist])
+
+
+  async function cartHandler(e){
+
+    try{
+      if (!token){
+        navigate("/loginpage")
+        return
+      }
+  
+      if (e.target.innerText === "Go To Cart"){
+        navigate("/cartpage")
+        return
+      }
+      
+      let response;
+      response = await PostCartData({
+        product: {...data, qty: 1}, encodedToken: token
+      })
+
+      if (response.status === 200 || response.status === 201) {
+        dispatch({
+          type: "SET_CART_LIST",
+          payload: response.data.cart
+        });
+      }
+
+    }catch (err) {
+      console.log(err);
+    }
+
+ 
+  }
 
   return (
     <div className="product-card relative">
@@ -47,7 +102,7 @@ const ProductCard = ({ data }) => {
         </section>
 
         <section className="product-card-btn-wrapper">
-          <button className="btn card-btn">Add to Cart</button>
+          <button className="btn card-btn" onClick={(e)=>cartHandler(e)}>{inCart ? "Go To Cart": "Add to Cart"}</button>
         </section>
       </section>
     </div>

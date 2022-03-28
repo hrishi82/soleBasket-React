@@ -60,6 +60,22 @@ body{
 }
 
 
+/******** Badge ********/
+
+.badge-w-txt{
+    position: absolute;
+    top: -0.3rem;
+    left: 1rem;
+    padding: 0.12rem 0.4rem;
+    border: 1px solid white;
+    color: var(--badge-font-clr);
+    background-color: var(--badge-w-txt-bg);
+    border-radius: 0.5rem;
+    font-size: 0.6rem;
+    width: fit-content;
+}
+
+
 /******** Section margins ********/
 
 .section-gutter-lg{
@@ -110,6 +126,8 @@ body{
 .card-btn{
     width: 100%;
 }
+
+
 
 
 
