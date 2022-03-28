@@ -1,2 +1,6 @@
 export {HomePage} from "./HomePage/HomePage"
 export {ProductPage} from "./ProductPage/ProductPage"
+export {LoginPage} from "./Auth/Login/LoginPage"
+export {LogoutPage} from "./Auth/Logout/LogoutPage"
+export {SignupPage} from "./Auth/Signup/SignupPage"
+export {CartPage} from "./CartPage/CartPage"

@@ -13,7 +13,8 @@ const initialState={
     allCategories: [],
     allCollections: [],
     allGenders: [],
-
+    cartlist: [],
+    wishlist:[]
   };
 
 const dataReducerFunc = (state, action) =>{
@@ -88,6 +89,9 @@ const dataReducerFunc = (state, action) =>{
             }
         }
 
+        case "SET_CART_LIST":{
+            return {...state, cartlist: action.payload}
+        }
 
 
         default:
