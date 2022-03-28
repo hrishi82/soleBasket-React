@@ -4,7 +4,7 @@ import {useState, useEffect} from "react"
 import {useData} from "../../../context/dataContext"
 import {useAuth} from "../../../context/authContext"
 import { Link, useNavigate } from 'react-router-dom';
-import {PostCartData} from "../../../services/services"
+import {PostCartData, PostWishlistData, DeleteWishItem} from "../../../services/services"
 
 const ProductCard = ({ data }) => {
   const [inCart, setInCart] = useState(false)
@@ -30,12 +30,22 @@ const ProductCard = ({ data }) => {
 
   useEffect(()=>{
     let findItemInCart = state.cartlist.find(el=>el._id === _id);
-    if (findItemInCart){
+    if (findItemInCart) {
       setInCart(true)
     }else{
       setInCart(false)
-    }
+    } 
   }, [state.cartlist])
+
+
+  useEffect(()=>{
+    let findItemInWishlist = state.wishlist.find(el=> el._id === _id);
+    if(findItemInWishlist){
+      setInWishlist(true)
+    }else{ 
+      setInWishlist(false)
+    }
+  }, [state.wishlist])
 
 
   async function cartHandler(e){
@@ -66,14 +76,48 @@ const ProductCard = ({ data }) => {
     }catch (err) {
       console.log(err);
     }
+  }
 
- 
+
+  const wishListHandler = async () =>{
+
+    try{
+      if(!token){
+        navigate("/loginpage")
+        return
+      }
+
+      let response = null;
+      if (inWishlist) {
+        response = await DeleteWishItem({
+          productId: _id,
+          encodedToken: token,
+        });
+      } else{
+        response = await PostWishlistData({
+          product: data,
+          encodedToken: token,
+        });
+      }
+
+      if (response.status === 200 || response.status === 201) {
+        dispatch({
+          type: "SET_WISH_LIST",
+          payload: response.data.wishlist
+        });
+      }
+
+
+    }catch(err){
+      console.log(err)
+    }
+
   }
 
   return (
     <div className="product-card relative">
-      <span className="product-card-badge absolute">
-        <i className="far fa-heart"></i>
+      <span className="product-card-badge absolute" onClick={wishListHandler}>
+        <i className={inWishlist ? "fas fa-heart wishlist-icon": "far fa-heart"}></i>
       </span>
 
       <span className="product-card-rating-badge absolute">

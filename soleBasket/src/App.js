@@ -1,7 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import {NavBar} from "./components"
-import { HomePage, ProductPage, LoginPage, LogoutPage, SignupPage, CartPage } from "./pages"
+import { HomePage, ProductPage, LoginPage, LogoutPage, SignupPage, CartPage, WishlistPage } from "./pages"
 
 import Mockman from "mockman-js";
 function MockAPI() {
@@ -23,6 +23,7 @@ function App() {
         <Route path="/logoutpage" element={<LogoutPage />} />
         <Route path="/signuppage" element={<SignupPage />} />
         <Route path="/cartpage" element={<CartPage />} />
+        <Route path="/wishlistpage" element={<WishlistPage />} />
         <Route path="/mockman" element={<MockAPI />} />
       </Routes>
     </div>

@@ -5,11 +5,11 @@ export const collections = [
   {
     _id: uuid(),
     collection: "summer",
-    description: "",
+    description: "Summer is here! Check out our best summer collection and stay fresh this season",
   },
   {
     _id: uuid(),
     collection: "winter",
-    description: "",
+    description: "Check out our best winter collection to stay warm in style this season",
   }
 ];

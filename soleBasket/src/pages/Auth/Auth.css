@@ -33,8 +33,13 @@
 .input-flex-cont{
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
     margin-top: 0.5rem;
+}
+
+.input-condition-cont{
+    display: flex;
+    align-items: center;
 }
 
 .input-checkbox{
@@ -90,4 +95,8 @@
     transform: translateY(-0.2rem);
     transition-timing-function: ease-in;
     transition: 0.2s;
+}
+
+.spacing-sm{
+    margin-left: 0.5rem;
 }

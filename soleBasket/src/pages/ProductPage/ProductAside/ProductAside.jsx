@@ -28,6 +28,25 @@ const ProductAside = () => {
   };
 
 
+  const Collections = ({ name }) => {
+    return (
+      <div className="radio-container filter-radio">
+        <input
+          type="checkbox"
+          name="colletion"
+          checked={state.filters.collections.includes(name)}
+          onChange={() =>
+            dispatch({ type: "FILTER_BY_COLLECTION", payload: name })
+          }
+        />
+        <label htmlFor="colletion" className="radio-label">
+          {name}
+        </label>
+      </div>
+    );
+  };
+
+
   const Rating = ({ rate }) => {
     return (
       <div className="radio-container filter-radio">
@@ -85,6 +104,20 @@ const ProductAside = () => {
           return (
             <>
               <Categories key={el} name={el} />
+            </>
+          );
+        })}
+      </div>
+
+      <div className="section-gutter-sm"></div>
+
+
+      <div className="sidebar-topic-cont">
+        <h3 className="sidebar-topic">Collections</h3>
+        {state.allCollections.map((el) => {
+          return (
+            <>
+              <Collections key={el} name={el} />
             </>
           );
         })}

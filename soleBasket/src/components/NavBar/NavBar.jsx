@@ -8,7 +8,7 @@ import {useAuth} from "../../context/authContext"
 const NavBar = () => {
 
   const {state, dispatch} = useData()
-  const {cartlist} = state
+  const {cartlist, wishlist} = state
 
   const {token, setToken, setUser} = useAuth()
   const navigate = useNavigate()
@@ -60,9 +60,9 @@ const NavBar = () => {
           Login
         </Link>}
 
-        <Link to="/" className="nav-link relative">
+        <Link to="/wishlistpage" className="nav-link relative">
           <i className="far fa-heart"></i>
-          <span className="badge-w-txt">9+</span>
+          {token && wishlist.length>0 &&<span className="badge-w-txt">{wishlist.length}</span>}
         </Link>
         <Link to="/cartpage" className="nav-link relative">
           <i className="far fa-shopping-cart"></i>
