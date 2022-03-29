@@ -100,17 +100,17 @@ const LoginPage = () => {
           </div>
 
           <div className="input input-flex-cont">
-            <span>
+            <div className="input-condition-cont">
               <input type="checkbox" className="input-checkbox" />
-              <span className="text">Remember Me</span>
-            </span>
+              <p className="text spacing-sm">Remember Me</p>
+            </div>
 
-            <a
-              href="#"
+            <Link
+              to="/loginpage"
               className="auth-form-forget-pass-alignment auth-page-link"
             >
               Forget your Password?
-            </a>
+            </Link>
           </div>
 
           <div className="auth-form-btn-container">

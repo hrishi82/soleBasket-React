@@ -1,5 +1,17 @@
-import {Link} from "react-router-dom"
-const CollectionCard = () => {
+import {Link, useNavigate} from "react-router-dom"
+import {useData} from "../../../context/dataContext"
+
+
+const CollectionCard = ({data}) => {
+
+  const navigate = useNavigate()
+
+  const {dispatch} = useData()
+
+  function cardHandler(){
+    dispatch({type: "FILTER_BY_COLLECTION", payload: data})
+  }
+
   return (
     <div className="collection-card">
       <div className="collection-card-img-box">
@@ -8,13 +20,14 @@ const CollectionCard = () => {
 
       <div className="collection-card-content">
         <p className="collection-card-label">NEW ARRIVALS</p>
-        <h3 className="collection-card-title">Winter Collection</h3>
+        <h3 className="collection-card-title">{data}</h3>
         <p className="collection-card-details">
-          Check out our best winter collection to stay warm in style this season
+          Check out this collection!
         </p>
         <Link
-          to="/"
+          to="/productpage"
           className="btn pill-btn btn-secondary collection-card-btn"
+          onClick={cardHandler}
         >
           Explore
         </Link>

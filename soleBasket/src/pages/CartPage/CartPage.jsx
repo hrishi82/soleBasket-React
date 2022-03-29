@@ -13,7 +13,7 @@ export const CartPage = () =>{
     })
 
     const cartQty = cartlist.reduce((acc, curr)=> curr = Number(curr.qty)+Number(acc), 0)
-    const cartPrice = cartlist.reduce((acc, curr)=> curr = Number(curr.price)+ Number(acc), 0)
+    const cartPrice = cartlist.reduce((acc, curr)=> curr = Number(curr.price*curr.qty)+ Number(acc), 0)
 
     const discount = 999
     const deliveryFee = 99

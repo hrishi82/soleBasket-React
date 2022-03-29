@@ -2,7 +2,7 @@
 import {useData} from "../../../context/dataContext"
 import {useAuth} from "../../../context/authContext"
 import axios from "axios";
-import {IncDecCart, DeleteCart} from "../../../services/services"
+import {IncDecCart, DeleteCart, PostWishlistData} from "../../../services/services"
 
 export const CartProductCard = ({data}) =>{
     const {state, dispatch} = useData();
@@ -61,6 +61,37 @@ export const CartProductCard = ({data}) =>{
         }
     }
 
+    const sendToWishlistHandler = async () =>{
+        try{
+            if(!token){
+                navigate("/loginpage")
+                return
+              }
+            
+            const itemCheck  = state.wishlist.some(el=>el._id === data._id)
+
+            let response = null;
+            if(itemCheck){
+                deleteItem()
+            }else{
+                response = await PostWishlistData({
+                    product: data,
+                    encodedToken: token,
+                  });
+                if (response.status === 200 || response.status === 201) {
+                dispatch({
+                    type: "SET_WISH_LIST",
+                    payload: response.data.wishlist
+                });
+                deleteItem()
+                }
+            }
+
+        }catch(err){
+            console.log(err)
+        }
+    }
+
     return (
         <div className="prod-card-landscape relative">
 
@@ -92,7 +123,7 @@ export const CartProductCard = ({data}) =>{
     
             <section className="product-card-btn-wrapper">
                 
-                <button className="btn outline-secondary-btn card-btn">Move to Wishlist</button>
+                <button className="btn outline-secondary-btn card-btn" onClick={sendToWishlistHandler}>Move to Wishlist</button>
                 <button className="btn outline-secondary-btn card-btn" onClick={deleteItem}>Remove from Cart</button>
 
             </section>

@@ -27,7 +27,7 @@ const dataReducerFunc = (state, action) =>{
 
             const categoryArr = action.payload.reduce((acc, curr)=>(acc.includes(curr.category)? acc: [...acc, curr.category]), []);
 
-            const collectionsArr = action.payload.reduce((acc, curr)=>(acc.includes(curr.collection)? acc: [...acc, curr.collection]), []);
+            const collectionsArr = action.payload.reduce((acc, curr)=>(acc.includes(curr.collection)? acc : [...acc, curr.collection]), []);
             
             const genderArr = action.payload.reduce((acc, curr)=>(acc.includes(curr.gender)? acc: [...acc, curr.gender]), []);
             
@@ -77,6 +77,17 @@ const dataReducerFunc = (state, action) =>{
             }
         }
 
+
+        case "FILTER_BY_COLLECTION":{
+            let res  = state.filters.collections.includes(action.payload)
+
+            if (res){
+                return {...state, filters:{...state.filters, collections: state.filters.collections.filter(el => el !== action.payload)}}
+            }else{
+                return {...state, filters:{...state.filters, collections: state.filters.collections.concat(action.payload)}}
+            }
+        }
+
         case "FILTER_BY_RATING":{
             return {...state, filters:{...state.filters, rating: action.payload}}
         }
@@ -91,6 +102,9 @@ const dataReducerFunc = (state, action) =>{
 
         case "SET_CART_LIST":{
             return {...state, cartlist: action.payload}
+        }
+        case "SET_WISH_LIST":{
+            return {...state, wishlist: action.payload}
         }
 
 

@@ -37,3 +37,13 @@ export const ratingFilter = (data, state) => {
     const rate = Number(state.filters.rating);
     return data.filter((el) => Number(el.rating) >= rate);
   };
+
+
+export const collectionFilter = (data,state) =>{
+    let prodData  = [...data]
+    if (state.filters.collections.length >0){
+        const newData = data.filter(el=>state.filters.collections.includes(el.collection))
+        return newData
+    }
+    return prodData
+}

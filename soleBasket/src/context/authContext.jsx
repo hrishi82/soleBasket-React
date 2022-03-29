@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext, createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginServices } from "../services/services";
+import { loginServices, SignupServices } from "../services/services";
 import { useData } from "../context/dataContext";
 
 const AuthContext = createContext();
@@ -20,8 +20,27 @@ const AuthProvider = ({ children }) => {
     }
   }, []);
 
+  const signupUser = async (email, password, name) => {
+    try {
+      const resp = await SignupServices({ email, password, name });
+      if (resp.status === 201) {
+        localStorage.setItem(
+          'login',
+          JSON.stringify({
+            token: resp.data.encodedToken,
+            user: resp.data.createdUser,
+          })
+        );
+        setUser(resp.data.createdUser);
+        setToken(resp.data.encodedToken);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ token, setToken, user, setUser }}>
+    <AuthContext.Provider value={{ token, setToken, user, setUser, signupUser }}>
       {children}
     </AuthContext.Provider>
   );
