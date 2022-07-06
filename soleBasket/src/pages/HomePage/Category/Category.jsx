@@ -23,7 +23,7 @@ const Category = () => {
 
   return (
     <section className="header-gender-container">
-      {state.allCategories.map(el=><CategoryLinks name={el}/>)}
+      {state.allCategories.map(el=><CategoryLinks key={el} name={el}/>)}
 
     </section>
   );

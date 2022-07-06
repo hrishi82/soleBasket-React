@@ -19,30 +19,19 @@ const DataProvider = ({ children }) => {
         let id;
         setLoader(true);
         (async()=>{
-            let productResult = await GetData()
-            if (productResult.status === 200 || productResult.status === 201){
-                dispatch({type: 'ALL_PRODUCTS_DATA_FROM_SERVER', payload: productResult.data.products})
+            try{
+                let productResult = await GetData()
+                if (productResult.status === 200 || productResult.status === 201){
+                    dispatch({type: 'ALL_PRODUCTS_DATA_FROM_SERVER', payload: productResult.data.products})
+                }
+                setLoader(false)
+            }catch(err){
+                console.log(err)
             }
-
-            const cartResp = GetCartItems({ encodedToken: token });
-            if (cartResp.status === 200 || cartResp.status === 201) {
-                dispatch({
-                type: "SET_CART_LIST",
-                payload:cartResp.data.cart ,
-                });
-            }
-
-            const wishResp = GetWishlistItems({ encodedToken: token });
-            if (wishResp.status === 200 || wishResp.status === 201) {
-                dispatch({
-                type: "SET_WISH_LIST",
-                payload: wishResp.data.wishlist
-                });
-            }
-            setLoader(false)
         })();
         
     }, [token])
+
   return <DataContext.Provider value={{state, dispatch, loader, removeLoader}}>{children}</DataContext.Provider>;
 };
 

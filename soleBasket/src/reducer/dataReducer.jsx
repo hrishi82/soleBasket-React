@@ -14,7 +14,8 @@ const initialState={
     allCollections: [],
     allGenders: [],
     cartlist: [],
-    wishlist:[]
+    wishlist:[],
+    toggleAsideFilter: false
   };
 
 const dataReducerFunc = (state, action) =>{
@@ -23,13 +24,13 @@ const dataReducerFunc = (state, action) =>{
 
         case "ALL_PRODUCTS_DATA_FROM_SERVER":{
 
-            const maxPrice = action.payload.reduce((acc,curr) => Number(curr.price)>acc?Number(curr.price):acc, 0);
+            const maxPrice = action.payload.reduce((acc,curr) => Number(curr?.price)>acc?Number(curr?.price):acc, 0);
 
-            const categoryArr = action.payload.reduce((acc, curr)=>(acc.includes(curr.category)? acc: [...acc, curr.category]), []);
+            const categoryArr = action.payload.reduce((acc, curr)=>(acc.includes(curr?.category)? acc: [...acc, curr?.category]), []);
 
-            const collectionsArr = action.payload.reduce((acc, curr)=>(acc.includes(curr.collection)? acc : [...acc, curr.collection]), []);
+            const collectionsArr = action.payload.reduce((acc, curr)=>(acc.includes(curr?.collection)? acc : [...acc, curr?.collection]), []);
             
-            const genderArr = action.payload.reduce((acc, curr)=>(acc.includes(curr.gender)? acc: [...acc, curr.gender]), []);
+            const genderArr = action.payload.reduce((acc, curr)=>(acc.includes(curr?.gender)? acc: [...acc, curr?.gender]), []);
             
             return {
                 ...state, 
@@ -44,7 +45,7 @@ const dataReducerFunc = (state, action) =>{
         } 
         
         case "CLEAR_ALL_FILTERS": {
-            const maxPrice = state.products.reduce((acc,curr) => Number(curr.price)>acc?Number(curr.price):acc, 0);
+            const maxPrice = state.products.reduce((acc,curr) => Number(curr?.price)>acc?Number(curr?.price):acc, 0);
 
             return {
                 ...state,
@@ -106,7 +107,9 @@ const dataReducerFunc = (state, action) =>{
         case "SET_WISH_LIST":{
             return {...state, wishlist: action.payload}
         }
-
+        case "TOGGLE_ASIDE_FILTER":{
+            return {...state, toggleAsideFilter: !state.toggleAsideFilter}
+        }
 
         default:
             return state

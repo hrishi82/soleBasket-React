@@ -5,36 +5,37 @@ import { useData } from "../../../context/dataContext";
 
 export const SignupPage = () => {
 
-    const [signupForm, setSignupForm] = useState({name: "", email: "", password: ""})
+    const [signupForm, setSignupForm] = useState({firstName: '',
+    lastName: '', email: "", password: ""})
 
     const {dispatch} = useData()
     const { token, signupUser } = useAuth();
     const navigate = useNavigate();
 
-    
-
     useEffect(() => {
-        let id;
-        if (token) {
-          id = setTimeout(() => {
-            navigate('/');
-          }, 500);
-        }
-        return () => clearTimeout(id);
-      });
-
+      let id;
+      if (token) {
+        id = setTimeout(() => {
+          navigate('/');
+        }, 500);
+      }
+      return () => clearTimeout(id);
+    }, [token]);
 
     function formHandler(e){
         e.preventDefault()
 
-        const {name, email, password} = signupForm
-        if (email && password && name !== '') {
+        const {firstName, lastName, email, password} = signupForm
+        try{
+          if (email && password && firstName && lastName !== '') {
             (async () => {
-              signupUser(email, password, name);
+              signupUser(firstName, lastName, email, password);
             })();
+          }
+        }catch(err){
+          console.log(err)
         }
     }
-    
 
   return (
     <div className="auth-page-container">
@@ -44,8 +45,13 @@ export const SignupPage = () => {
         </div>
 
         <div className="input">
-          <label>Name</label>
-          <input className="input-txt" type="name" value={signupForm.name} onChange={(e)=>setSignupForm({...signupForm, name: e.target.value})} />
+          <label>First Name</label>
+          <input className="input-txt" type="name" value={signupForm.firstName} onChange={(e)=>setSignupForm({...signupForm, firstName: e.target.value})} />
+        </div>  
+
+        <div className="input">
+          <label>Last Name</label>
+          <input className="input-txt" type="name" value={signupForm.lastName} onChange={(e)=>setSignupForm({...signupForm, lastName: e.target.value})} />
         </div>  
 
         <div className="input">

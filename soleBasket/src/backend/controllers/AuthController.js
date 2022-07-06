@@ -1,7 +1,9 @@
-import { v4 as uuid } from "uuid";
-import { Response } from "miragejs";
-import { formatDate } from "../utils/authUtils";
-const sign = require("jwt-encode");
+import { v4 as uuid } from 'uuid';
+import { Response } from 'miragejs';
+import { formatDate } from '../utils/authUtils';
+import bcrypt from 'bcryptjs';
+const jwt = require('jsonwebtoken');
+
 /**
  * All the routes related to Auth are present here.
  * These are Publicly accessible routes.
@@ -23,23 +25,28 @@ export const signupHandler = function (schema, request) {
         422,
         {},
         {
-          errors: ["Unprocessable Entity. Email Already Exists."],
+          errors: ['Unprocessable Entity. Email Already Exists.'],
         }
       );
     }
     const _id = uuid();
+    const encryptedPassword = bcrypt.hashSync(password, 5);
     const newUser = {
       _id,
       email,
-      password,
+      password: encryptedPassword,
       createdAt: formatDate(),
       updatedAt: formatDate(),
       ...rest,
       cart: [],
       wishlist: [],
+      address: [],
     };
     const createdUser = schema.users.create(newUser);
-    const encodedToken = sign({ _id, email }, process.env.REACT_APP_JWT_SECRET);
+    const encodedToken = jwt.sign(
+      { _id, email },
+      process.env.REACT_APP_JWT_SECRET
+    );
     return new Response(201, {}, { createdUser, encodedToken });
   } catch (error) {
     return new Response(
@@ -66,11 +73,11 @@ export const loginHandler = function (schema, request) {
       return new Response(
         404,
         {},
-        { errors: ["The email you entered is not Registered. Not Found error"] }
+        { errors: ['The email you entered is not Registered. Not Found error'] }
       );
     }
-    if (password === foundUser.password) {
-      const encodedToken = sign(
+    if (bcrypt.compareSync(password, foundUser.password)) {
+      const encodedToken = jwt.sign(
         { _id: foundUser._id, email },
         process.env.REACT_APP_JWT_SECRET
       );
@@ -82,7 +89,7 @@ export const loginHandler = function (schema, request) {
       {},
       {
         errors: [
-          "The credentials you entered are invalid. Unauthorized access error.",
+          'The credentials you entered are invalid. Unauthorized access error.',
         ],
       }
     );

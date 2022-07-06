@@ -1,9 +1,31 @@
 .sidebar-wrapper{
-    width: 15rem;
+    width: 25vw;
     height: 100%;
     background-color: var(--white-bg);
     padding: 1rem;
     border-radius: 0.2rem;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 6vh;
+    overflow-y: scroll;
+}
+
+.aside-master-wrapper{
+    position:fixed;
+    left:0;
+    top:0;
+    width:100vw;
+    height:100vh;
+    display:none;
+    background-color:#000;
+    opacity:0.9;
+    z-index: 50;
+    overflow-y: scroll;
+}
+
+.viewAsideDiv{
+    display: block;
 }
 
 .sidebar-title-cont{
@@ -68,4 +90,24 @@
 }
 .radio-container  > input{
     margin: 0;
+}
+
+
+.filter-section-division{
+    background-color: rgb(231, 231, 231);
+    padding-top: 0.01rem;
+    margin: 2rem 0;
+}
+
+
+
+@media screen and (max-width:900px){
+    .sidebar-wrapper{
+        width: 40vw
+    }
+}
+@media screen and (max-width:500px){
+    .sidebar-wrapper{
+        width: 50vw
+    }
 }

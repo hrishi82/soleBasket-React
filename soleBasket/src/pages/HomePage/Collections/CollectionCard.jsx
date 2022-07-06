@@ -1,6 +1,6 @@
 import {Link, useNavigate} from "react-router-dom"
 import {useData} from "../../../context/dataContext"
-
+import "./collections.css"
 
 const CollectionCard = ({data}) => {
 
@@ -19,7 +19,7 @@ const CollectionCard = ({data}) => {
       </div>
 
       <div className="collection-card-content">
-        <p className="collection-card-label">NEW ARRIVALS</p>
+        {/* <p className="collection-card-label">NEW ARRIVALS</p> */}
         <h3 className="collection-card-title">{data}</h3>
         <p className="collection-card-details">
           Check out this collection!
