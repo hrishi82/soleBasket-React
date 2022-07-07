@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/authContext";
 import { useData } from "../../../context/dataContext";
-import { GetCartItems, loginServices } from "../../../services/services";
+import { GetCartItems, GetWishlistItems, loginServices } from "../../../services/services";
 
 const LoginPage = () => {
   const { token, setToken, user, setUser } = useAuth();
@@ -16,7 +16,7 @@ const LoginPage = () => {
     let id;
     if (token) {
       id = setTimeout(() => {
-        navigate("/");
+        navigate('/');
       }, 500);
     }
     return () => clearTimeout(id);
@@ -28,11 +28,11 @@ const LoginPage = () => {
       let response;
       if (e.target.innerText === "Login as Guest") {
         setLoginUser({
-          email: "adarshbalika@gmail.com",
-          password: "adarshbalika",
+          email: "johndoe@gmail.com",
+          password: "johnDoe123",
         });
       
-        response = await loginServices('adarshbalika@gmail.com', 'adarshbalika');
+        response = await loginServices('johndoe@gmail.com', 'johnDoe123');
         
       } else {
         response = await loginServices(loginUser.email, loginUser.password);
@@ -47,21 +47,31 @@ const LoginPage = () => {
           })
         );
 
-        const cartResponse = await GetCartItems({
-          encodedToken: response.data.encodedToken,
-        });
-        if (cartResponse.status === 200 || cartResponse.status === 201) {
-          dispatch({
-            type: "SET_CART_LIST",
-            payload: cartResponse.data.cart
-          });
-        }
+        // const cartResponse = await GetCartItems({
+        //   encodedToken: response.data.encodedToken,
+        // });
+        // if (cartResponse.status === 200 || cartResponse.status === 201) {
+        //   dispatch({
+        //     type: "SET_CART_LIST",
+        //     payload: cartResponse.data.cart
+        //   });
+        // }
 
+        // const wishResp = await GetWishlistItems({
+        //   encodedToken: response.data.encodedToken,
+        // });
+        // if (wishResp.status === 200 || wishResp.status === 201) {
+        //   dispatch({
+        //     type: "SET_WISH_LIST",
+        //     payload: wishResp.data.wishlist,
+        //   });
+        // }
 
         setUser(response.data.foundUser);
         setToken(response.data.encodedToken);
         navigate("/productpage");
-      }
+
+       }
     } catch (err) {
       console.log(err);
     }

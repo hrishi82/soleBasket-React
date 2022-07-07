@@ -1,11 +1,11 @@
 import "./productpage.css"
-import {ProductAside} from "./ProductAside/ProductAside"
 import {ProductMain} from "./ProductMain/ProductMain"
+import { useData } from "../../context/dataContext";
 
 const ProductPage = () =>{
+    const {state} = useData()
     return (
         <div className="product-page-container">
-            <ProductAside/>
             <ProductMain/>
         </div>
     )

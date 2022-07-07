@@ -1,6 +1,5 @@
 import axios from "axios"
 
-export const GetData = async () => axios.get("/api/products");
 
 export const loginServices = async (email, password) =>
   await axios.post('/api/auth/login', {
@@ -8,13 +7,27 @@ export const loginServices = async (email, password) =>
     password,
   });
 
-  export const GetCartItems = async ({ encodedToken }) => {
-    return await axios.get('/api/user/cart', {
-      headers: {
-        authorization: encodedToken,
-      },
-    });
-  };
+
+  export const SignupServices = async ({   firstName,
+    lastName, email, password }) =>
+  await axios.post('/api/auth/signup', {
+    firstName,
+    lastName,
+    email,
+    password
+  });
+
+export const GetData = async () => axios.get("/api/products");
+
+export const GetCartItems = async ({ encodedToken }) => {
+  return await axios.get('/api/user/cart', {
+    headers: {
+      authorization: encodedToken,
+    },
+  });
+};
+
+
 
   export const PostCartData = async ({encodedToken, product}) =>{
     return (
@@ -67,9 +80,3 @@ export const loginServices = async (email, password) =>
     });
   };
 
-  export const SignupServices = async ({ email, password, name }) =>
-  await axios.post('/api/auth/signup', {
-    email,
-    password,
-    name,
-  });

@@ -9,7 +9,7 @@ const Collections = () => {
     <>
       <h1 className="topic-heading">COLLECTIONS</h1>
       <section className="collection-cards-container">
-        {allCollections.map(el=><CollectionCard data={el}/>)}
+        {allCollections.map(el=><CollectionCard key={el} data={el}/>)}
       </section>
     </>
   );

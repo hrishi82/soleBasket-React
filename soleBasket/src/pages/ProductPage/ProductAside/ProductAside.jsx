@@ -59,7 +59,8 @@ const ProductAside = () => {
   };
 
   return (
-    <aside className="sidebar-wrapper">
+    <>
+     <aside className="sidebar-wrapper">
       <div className="sidebar-title-cont">
         <h3 className="sidebar-title">Filters</h3>
         <button
@@ -70,14 +71,15 @@ const ProductAside = () => {
         </button>
       </div>
 
-      <div className="section-gutter-reg"></div>
+      {/* <div className="section-gutter-reg"></div> */}
+      <hr className="filter-section-division"/>
 
       <div className="sidebar-topic-cont">
         <h3 className="sidebar-topic">Price</h3>
         <div className="price-slider-container">
           <div className="price-slider-values">
             <span className="text-sm">0</span>
-            <span className="text-sm">{maxPrice / 2}</span>
+            <span className="text-sm">{Math.floor(maxPrice / 2)}</span>
             <span className="text-sm">{maxPrice}</span>
           </div>
           <input
@@ -96,7 +98,8 @@ const ProductAside = () => {
         </div>
       </div>
 
-      <div className="section-gutter-sm"></div>
+      {/* <div className="section-gutter-sm"></div> */}
+      <hr className="filter-section-division"/>
 
       <div className="sidebar-topic-cont">
         <h3 className="sidebar-topic">Category</h3>
@@ -109,7 +112,8 @@ const ProductAside = () => {
         })}
       </div>
 
-      <div className="section-gutter-sm"></div>
+      {/* <div className="section-gutter-sm"></div> */}
+      <hr className="filter-section-division"/>
 
 
       <div className="sidebar-topic-cont">
@@ -123,14 +127,16 @@ const ProductAside = () => {
         })}
       </div>
 
-      <div className="section-gutter-sm"></div>
+      {/* <div className="section-gutter-sm"></div> */}
+      <hr className="filter-section-division"/>
 
       <div className="sidebar-topic-cont">
         <h3 className="sidebar-topic">Rating</h3>
         {["4", "3", "2", "1"].map(el=><Rating key={el} rate={el}/>)}
       </div>
 
-      <div className="section-gutter-sm"></div>
+      {/* <div className="section-gutter-sm"></div> */}
+      <hr className="filter-section-division"/>
 
       <div className="sidebar-topic-cont">
         <h3 className="sidebar-topic">Sort By</h3>
@@ -147,7 +153,15 @@ const ProductAside = () => {
           </label>
         </div>
       </div>
+
+
+    <hr className="filter-section-division"/>
+    <div className="section-gutter-sm"></div>
     </aside>
+
+    
+    </>
+   
   );
 };
 
