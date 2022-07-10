@@ -24,7 +24,7 @@ const ProductMain = () => {
         <h3 className="products-container-info-text">
           Showing {filteredData.length} Products{" "}
         </h3>
-        <h3 className="products-container-info-text" onClick={asideHandler}>
+        <h3 className="products-container-info-text products-filter-selector-btn" onClick={asideHandler}>
           FILTERS
         </h3>
       </div>

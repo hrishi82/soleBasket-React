@@ -30,12 +30,14 @@
 
 .sidebar-title-cont{
     display: flex;
+    margin-top: 2rem;
 }
 
 
 .sidebar-title{
     margin: 0;
     font-size: 1.1rem;
+    /* font-weight: 600; */
 }
 
 .sidebar-reset-btn{

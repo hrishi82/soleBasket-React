@@ -67,7 +67,7 @@ const ProductAside = () => {
           onClick={() => dispatch({ type: "CLEAR_ALL_FILTERS" })}
           className="sidebar-reset-btn"
         >
-          Clear all
+          CLEAR ALL
         </button>
       </div>
 

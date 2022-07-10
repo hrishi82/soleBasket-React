@@ -4,13 +4,14 @@
     border-radius: 3rem;
     display: flex;
     justify-content: space-between;
-    width: fit-content;
+    width: 20vw;
 }
 
 .search-bar{
     border: none;
     background-color: transparent;
     padding: 0.2rem 0.6rem;
+    width: 100%;
 }
 .search-bar:focus{
     outline: none;

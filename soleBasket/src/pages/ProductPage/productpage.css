@@ -15,10 +15,15 @@
     margin: 1rem 0;
 }
 
+
 .products-container-info-text{
     font-size: 0.9rem;
     font-weight: 400;
     
+}
+
+.products-filter-selector-btn{
+    cursor: pointer;
 }
 
 .products-container-content{
