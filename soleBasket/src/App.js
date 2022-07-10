@@ -13,7 +13,7 @@ import {
   ErrorPage,
 } from "./pages";
 import { ProtectedRoute } from "./Routes/ProtectedRoute";
-import { ToastContainer } from "react-toastify";
+// import { ToastContainer } from "react-toastify";
 
 import Mockman from "mockman-js";
 function MockAPI() {
@@ -57,7 +57,7 @@ function App() {
         <Route path="*" element={<ErrorPage />} />
         <Route path="/mockman" element={<MockAPI />} />
       </Routes>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </div>
   );
 }
