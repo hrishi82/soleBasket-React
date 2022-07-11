@@ -1,8 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./NavBar.css"
-import "./SearchBar.css"
+import { SearchBar } from "./SearchBar/SearchBar";
 import {useData} from "../../context/dataContext"
 import {useAuth} from "../../context/authContext"
+import { useState, useEffect } from "react";
 
 
 const NavBar = () => {
@@ -13,6 +14,16 @@ const NavBar = () => {
   const {token, setToken, setUser} = useAuth()
   const navigate = useNavigate()
 
+  const [displaySearch, setDisplaySearch] = useState(false)
+
+
+  useEffect(()=>{
+    if(location.pathname === "/loginpage" || location.pathname === "/signuppage" || location.pathname === "/logoutpage"){
+      setDisplaySearch(false)
+    }else{
+      setDisplaySearch(true)
+    }
+}, [location.pathname])
 
   const logoutHandler = (e) =>{
     e.preventDefault()
@@ -35,22 +46,12 @@ const NavBar = () => {
         </h4>
       </nav>
 
-      <nav className="nav-items-center">
-        <div className="search-wrapper nav-search-bar">
-          <input
-            type="text"
-            placeholder="Search.."
-            name="search-bar"
-            className="search-bar"
-          />
-          <button type="submit" className="search-bar-btn">
-            <i className="far fa-search"></i>
-          </button>
-        </div>
-      </nav>
+      {/* <nav className="nav-items-center">
+      {displaySearch && <SearchBar />}
+      </nav> */}
 
       <nav className="nav-items-right">
-      <Link to="/productpage" className="nav-link">
+      <Link to="/productpage" className="nav-link" onClick={()=>dispatch({type:"FILTER_BY_SEARCH", payload: ""})}>
           All Products
         </Link>
 
@@ -67,6 +68,10 @@ const NavBar = () => {
         <Link to="/cartpage" className="nav-link relative">
           <i className="far fa-shopping-cart"></i>
           {token && cartlist.length>0 && <span className="badge-w-txt">{cartlist.length}</span>}
+        </Link>
+        
+        <Link to="/profilepage/profile" className="nav-link profile-nav-link">
+          <i className="far fa-user-circle"></i>
         </Link>
       </nav>
     </nav>

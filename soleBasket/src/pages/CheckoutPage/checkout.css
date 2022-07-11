@@ -1,0 +1,48 @@
+.checkout-pg-master-container{
+    display:flex;
+    padding: 1.5rem;
+    max-width: 60rem;
+    margin:auto;
+    margin-top: 2rem;
+    justify-content: space-evenly;
+    margin-bottom: 5rem;
+}
+
+.checkput-pg-address-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkout-pg-address-selection-card-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.checkout-pg-address-selection-card-wrapper .addresscard-main-container{
+    width: 30rem;
+    background-color: var(--card-bg);
+}
+.checkout-pg-add-address-btn{
+    width: 100%;
+    margin-top: 2rem;
+}
+
+@media screen and (max-width:1000px) {
+    .checkout-pg-master-container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .checkout-pg-address-selection-card-wrapper .addresscard-main-container{
+        width: 70vw;
+    } 
+    .checkput-pg-address-container{
+        align-items: flex-start;
+    }
+}

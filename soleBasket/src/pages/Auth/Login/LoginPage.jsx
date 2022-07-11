@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/authContext";
 import { useData } from "../../../context/dataContext";
-import { GetCartItems, GetWishlistItems, loginServices } from "../../../services/services";
+import { loginServices } from "../../../services/services";
+import {validateEmail} from "../../../utils/authUtils"
 
 const LoginPage = () => {
   const { token, setToken, user, setUser } = useAuth();
@@ -11,6 +12,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const [loginUser, setLoginUser] = useState({ email: "", password: "" });
+  const [authInputError, setAuthInputError] = useState({ email: "", password: "", errorMessage: "" });
 
   useEffect(() => {
     let id;
@@ -47,35 +49,38 @@ const LoginPage = () => {
           })
         );
 
-        // const cartResponse = await GetCartItems({
-        //   encodedToken: response.data.encodedToken,
-        // });
-        // if (cartResponse.status === 200 || cartResponse.status === 201) {
-        //   dispatch({
-        //     type: "SET_CART_LIST",
-        //     payload: cartResponse.data.cart
-        //   });
-        // }
-
-        // const wishResp = await GetWishlistItems({
-        //   encodedToken: response.data.encodedToken,
-        // });
-        // if (wishResp.status === 200 || wishResp.status === 201) {
-        //   dispatch({
-        //     type: "SET_WISH_LIST",
-        //     payload: wishResp.data.wishlist,
-        //   });
-        // }
-
         setUser(response.data.foundUser);
         setToken(response.data.encodedToken);
         navigate("/productpage");
 
        }
     } catch (err) {
-      console.log(err);
+      setAuthInputError({...authInputError, errorMessage: "Please provide proper input or credentials"})
+
     }
   };
+
+  const credentialHandler = (e) =>{
+
+    setAuthInputError({...authInputError, errorMessage: ""})
+
+    if(e.target.name=== "email"){
+      setLoginUser({ ...loginUser, email: e.target.value })
+      if (!validateEmail(e.target.value)) {
+        setAuthInputError({
+          ...authInputError,
+          email: 'Invalid email format',
+        });
+      } else {
+        setAuthInputError({ ...authInputError, email: '' });
+      }
+      
+      
+    }else if(e.target.name=== "password"){
+      setLoginUser({ ...loginUser, password: e.target.value })
+    }
+    
+  }
 
   return (
     <>
@@ -85,26 +90,40 @@ const LoginPage = () => {
             <h2 className="text-center">Login</h2>
           </div>
 
+          {authInputError.errorMessage !== "" ? (
+                <div className='input auth-input-error-cont text-center'>
+                  {authInputError.errorMessage}
+                </div>
+              ) : null}
+
           <div className="input">
             <label>Email</label>
             <input
               className="input-txt"
+              name="email"
               type="email"
               value={loginUser.email}
               onChange={(e) =>
-                setLoginUser({ ...loginUser, email: e.target.value })
+                credentialHandler(e)
               }
             />
           </div>
+
+          {authInputError.email ? (
+                <div className='input auth-input-error-cont'>
+                  {authInputError.email}
+                </div>
+              ) : null}
 
           <div className="input">
             <label>Password</label>
             <input
               className="input-txt"
               type="password"
+              name="password"
               value={loginUser.password}
               onChange={(e) =>
-                setLoginUser({ ...loginUser, password: e.target.value })
+                credentialHandler(e)
               }
             />
           </div>
@@ -119,7 +138,7 @@ const LoginPage = () => {
               to="/loginpage"
               className="auth-form-forget-pass-alignment auth-page-link"
             >
-              Forget your Password?
+              Forgot your Password?
             </Link>
           </div>
 

@@ -47,3 +47,12 @@ export const collectionFilter = (data,state) =>{
     }
     return prodData
 }
+ 
+export const searchFilter = (data, state) => {
+    if (state.filters.search === '') return data;
+    return (
+        data.filter((el) =>
+        el.name.toLowerCase().includes(state.filters.search.toLowerCase()) 
+      ) 
+    )
+  };

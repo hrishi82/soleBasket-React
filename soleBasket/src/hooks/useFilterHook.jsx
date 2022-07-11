@@ -6,7 +6,8 @@ import {
     genderFilter,
     priceRangeFilter,
     ratingFilter,
-    collectionFilter  } from "../utils/utils"
+    collectionFilter,
+    searchFilter  } from "../utils/utils"
 
 export const useFilterHook = () =>{
     const {state}  = useData()
@@ -17,6 +18,7 @@ export const useFilterHook = () =>{
     data = genderFilter(data, state)
     data = priceRangeFilter(data, state)
     data = ratingFilter(data, state)
+    data = searchFilter(data, state)
     return { filteredData : data}
 }
 

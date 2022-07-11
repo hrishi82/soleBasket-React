@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/authContext";
 import { useData } from "../../../context/dataContext";
+import {validateEmail, validatePassword} from "../../../utils/authUtils"
 
 export const SignupPage = () => {
 
     const [signupForm, setSignupForm] = useState({firstName: '',
     lastName: '', email: "", password: ""})
+    const [authInputError, setAuthInputError] = useState({ email: "", password: "", errorMessage: "" });
+
 
     const {dispatch} = useData()
     const { token, signupUser } = useAuth();
@@ -31,11 +34,50 @@ export const SignupPage = () => {
             (async () => {
               signupUser(firstName, lastName, email, password);
             })();
+          }else{
+            setAuthInputError({...authInputError, errorMessage: "Please provide proper input"})
           }
         }catch(err){
           console.log(err)
         }
     }
+
+    const credentialHandler = (e) =>{
+
+      setAuthInputError({...authInputError, errorMessage: ""})
+
+      if(e.target.name=== "email"){
+        setSignupForm({ ...signupForm, email: e.target.value })
+        if (!validateEmail(e.target.value)) {
+          setAuthInputError({
+            ...authInputError,
+            email: 'Invalid email format',
+          });
+        } else {
+          setAuthInputError({ ...authInputError, email: '' });
+        }
+        
+        
+      }else if(e.target.name=== "password"){
+        
+        setSignupForm({ ...signupForm, password: e.target.value })
+        if (!validatePassword(e.target.value)) {
+          setAuthInputError({
+            ...authInputError,
+            password:
+              'Password should be in 8 to 20 chars and should have one digit',
+          });
+        } else {
+          setAuthInputError({ ...authInputError, password: '' });
+        }
+      }else if(e.target.name=== "firstname"){
+        setSignupForm({...signupForm, firstName: e.target.value})
+      }else if(e.target.name=== "lastname"){
+        setSignupForm({...signupForm, lastName: e.target.value})
+      }
+      
+    }
+  
 
   return (
     <div className="auth-page-container">
@@ -44,25 +86,41 @@ export const SignupPage = () => {
           <h2 className="text-center">Signup</h2>
         </div>
 
+        {authInputError.errorMessage !== "" ? (
+                <div className='input auth-input-error-cont text-center'>
+                  {authInputError.errorMessage}
+                </div>
+              ) : null}
+
         <div className="input">
           <label>First Name</label>
-          <input className="input-txt" type="name" value={signupForm.firstName} onChange={(e)=>setSignupForm({...signupForm, firstName: e.target.value})} />
+          <input className="input-txt" type="name" name="firstname" value={signupForm.firstName} onChange={(e)=>credentialHandler(e)} />
         </div>  
 
         <div className="input">
           <label>Last Name</label>
-          <input className="input-txt" type="name" value={signupForm.lastName} onChange={(e)=>setSignupForm({...signupForm, lastName: e.target.value})} />
+          <input className="input-txt" type="name" name="lastname" value={signupForm.lastName} onChange={(e)=>credentialHandler(e)} />
         </div>  
 
         <div className="input">
           <label>Email</label>
-          <input className="input-txt" type="email" value={signupForm.email} onChange={(e)=>setSignupForm({...signupForm, email: e.target.value})}/>
+          <input className="input-txt" type="email" name="email" value={signupForm.email} onChange={(e)=>credentialHandler(e)}/>
         </div>
+        {authInputError.email ? (
+                <div className='input auth-input-error-cont'>
+                  {authInputError.email}
+                </div>
+              ) : null}
 
         <div className="input">
           <label>Password</label>
-          <input className="input-txt" type="password" value={signupForm.password} onChange={(e)=>setSignupForm({...signupForm, password: e.target.value})}/>
+          <input className="input-txt" type="password"  name="password" value={signupForm.password} onChange={(e)=>credentialHandler(e)}/>
         </div>
+        {authInputError.password ? (
+                <div className='input auth-input-error-cont'>
+                  {authInputError.password}
+                </div>
+              ) : null}
 
         <div className="input input-flex-cont">
           <div className="input-condition-cont">
