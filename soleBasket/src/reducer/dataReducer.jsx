@@ -54,6 +54,7 @@ const initialState = {
   },
   toggleAsideFilter: false,
   displayAddressModal: false,
+  displayNavSidebar: false
 };
 
 const dataReducerFunc = (state, action) => {
@@ -241,6 +242,9 @@ const dataReducerFunc = (state, action) => {
           filters: { ...state.filters, search: action.payload },
         };
       }
+      case "TOGGLE_NAV_SIDEBAR":{
+        return {...state, displayNavSidebar: !state.displayNavSidebar}
+    }
 
     default:
       return state;

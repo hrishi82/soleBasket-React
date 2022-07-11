@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { NavBar } from "./components";
+import { NavBar, NavAside } from "./components";
 import {
   HomePage,
   ProductPage,
@@ -31,8 +31,9 @@ function MockAPI() {
 
 function App() {
   return (
-    <div className="App">
+    <div className="App relative">
       <NavBar />
+      <NavAside />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/productpage" element={<ProductPage />} />
