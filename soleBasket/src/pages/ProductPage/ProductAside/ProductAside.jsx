@@ -59,7 +59,6 @@ const ProductAside = () => {
   };
 
   return (
-    <>
      <aside className="sidebar-wrapper">
       <div className="sidebar-title-cont">
         <h3 className="sidebar-title">Filters</h3>
@@ -158,9 +157,6 @@ const ProductAside = () => {
     <hr className="filter-section-division"/>
     <div className="section-gutter-sm"></div>
     </aside>
-
-    
-    </>
    
   );
 };

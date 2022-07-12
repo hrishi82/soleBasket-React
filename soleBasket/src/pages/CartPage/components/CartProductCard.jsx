@@ -1,8 +1,8 @@
 
 import {useData} from "../../../context/dataContext"
 import {useAuth} from "../../../context/authContext"
-import axios from "axios";
 import {IncDecCart, DeleteCart, PostWishlistData} from "../../../services/services"
+import "./cartproductcard.css"
 
 export const CartProductCard = ({data}) =>{
     const {state, dispatch} = useData();
@@ -101,16 +101,12 @@ export const CartProductCard = ({data}) =>{
 
         <section className="prod-card-landscape-body">
             <section className="product-card-body">
-                <h5 className="product-card-title"><span className='text-reg'>{brand}</span></h5>
-                <h5 className="product-card-title"><span className='text-reg'>{name}</span></h5>
+                <h5 className="product-card-title">{brand}</h5>
+                <h5 className="product-card-product-name">{name}</h5>
                 <div className="product-card-price-wrapper">
                     <div className="product-card-price-section">
-                        <h5 className="product-card-prod-price">{price}</h5>
-                        {/* <h6 className="product-card-prod-prev-price">Rs.14499</h6> */}
+                        <h5 className="product-card-prod-price"> ₹ {price}</h5>
                     </div>
-                    {/* <div className="product-card-price-subinfo">
-                        <h6 className="product-card-off-percent">(33% off)</h6>
-                    </div> */}
                 </div>
             </section>
 

@@ -13,9 +13,11 @@ const ProductMain = () => {
     dispatch({ type: "TOGGLE_ASIDE_FILTER" });
   };
 
+
+
   return (
     <>
-          {state.toggleAsideFilter && <ProductAside/>}
+          {state.toggleAsideFilter && <ProductAside />}
       <div  onClick={()=>dispatch({type: "TOGGLE_ASIDE_FILTER"})} className={`aside-master-wrapper ${state.toggleAsideFilter ? "viewAsideDiv" : null}`}>   </div>
 
     <section className="products-container relative">
@@ -32,9 +34,7 @@ const ProductMain = () => {
       <div className="products-container-content">
         {filteredData.map((el) => {
           return (
-            <>
               <ProductCard key={el?._id} data={el} />
-            </>
           );
         })}
       </div>

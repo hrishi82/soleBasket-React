@@ -1,7 +1,7 @@
 .cart-page-container{
     display:flex;
     padding: 1.5rem;
-    max-width: 60rem;
+    max-width: 65rem;
     margin:auto;
     justify-content: center;
 }
@@ -10,8 +10,9 @@
 /* Cart Summary Card */
 
 .cart-summary-container{
-    width: 15rem;
+    width: 18rem;
     background-color: var(--card-bg);
+    margin-top: 0.5rem;
     margin-left: 1rem;
     padding: 1.5rem;
     height: max-content;
@@ -47,3 +48,18 @@
     margin-bottom: 0.5rem;
 }
 
+
+@media screen and (max-width:1000px) {
+    .cart-page-container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0rem;
+        margin: 0;
+    }
+
+    .cart-summary-container{
+        width: 90vw;
+        margin: 1.5rem 0;
+    }
+}

@@ -1,0 +1,106 @@
+.addresscard-main-container{
+    margin: 1rem 0;
+    background-color: rgb(239, 239, 239);
+    padding: 1.5rem;
+    padding-bottom: 1rem;
+    border-radius: 0.3rem;
+}
+
+.addresscard-action-btn-container{
+    width: 100%;
+    text-align: end;
+    margin-top: 0.5rem;
+}
+
+.addresscard-action-btn{
+    background-color: transparent;
+    border: none;
+    margin-left: 1.5rem;
+    cursor: pointer;
+}
+
+.addressmodal-bg-master-wrapper{
+    position:fixed;
+    left:0;
+    top:0;
+    width:100vw;
+    height:100vh;
+    display:none;
+    background-color:#000;
+    opacity:0.9;
+    z-index: 2;
+}
+
+
+.address-input-modal-container {
+    position:fixed;
+    left:50%;
+    top:50%;
+    transform:translate(-50%, -50%);
+    display:none;
+    z-index: 3;
+  }
+  
+.viewModal{
+      display: block;
+  }
+
+
+
+.address-card{
+    color: var(--text-default-clr);
+    box-shadow: 0px 0px 35px 25px rgba(0,0,0,0.3);
+    min-height: 10rem;
+    width: 30rem;
+    margin: auto;
+    outline: 1px solid var(--outline-color);
+    height: auto;
+    padding: 1rem 1.5rem;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    background-color: white;
+    border-radius: 0.2rem;
+}
+
+.address-card-body-container{
+    padding: 0 1rem;
+}
+
+
+.address-card-input-wrapper{
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+}
+
+.address-card-input-txt{
+    margin-top: 0.3rem;
+    border-radius: 0.2rem;
+    padding: 0.4rem 0.8rem;
+    width: 100%;
+    border: 0.2px solid black;
+    font-size: 1rem;
+}
+
+
+.address-card-footer-container{
+    margin: 3rem 0 1rem 0;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 200;
+    align-items: center;
+}
+
+
+.address-input-error-cont{
+    font-size: 0.8rem;
+    color: red;
+}
+
+
+@media screen and (max-width:800px) {
+    .address-card{
+        width: 90vw;
+    }
+  }
+  

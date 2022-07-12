@@ -100,3 +100,12 @@
 .spacing-sm{
     margin-left: 0.5rem;
 }
+
+
+
+
+.auth-input-error-cont{
+    font-size: 0.8rem;
+    color: red;
+    margin: 0 0 1rem 0;
+}

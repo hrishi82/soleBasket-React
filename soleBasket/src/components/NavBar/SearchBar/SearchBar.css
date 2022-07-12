@@ -24,3 +24,21 @@
     cursor: pointer;
     margin-left: auto;
 }
+
+
+/* Search Modal */
+.search-modal-wrapper{
+    position: absolute;
+    top: 13rem;
+    left: 50%;
+    transform:translate(-50%, -50%);
+    margin: 0.5rem;
+    padding: 1rem;
+    width: 30rem;
+    min-height: 20rem;
+    background-color: var(--card-bg);
+    border: 1px solid black;
+    border-radius: 0.3rem;
+    overflow: hidden;
+    overflow-y: auto; 
+}
