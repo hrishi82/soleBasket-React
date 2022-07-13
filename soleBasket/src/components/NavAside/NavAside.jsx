@@ -31,7 +31,10 @@ export const NavAside = () => {
               <Link
                 to="/productpage"
                 className="sidebar-links"
-                onClick={() => dispatch({ type: "TOGGLE_NAV_SIDEBAR" })}
+                onClick={() => {
+                  dispatch({ type: "CLEAR_ALL_FILTERS" })
+                  dispatch({ type: "TOGGLE_NAV_SIDEBAR" })
+                }}
               >
                 ALL PRODUCTS
               </Link>

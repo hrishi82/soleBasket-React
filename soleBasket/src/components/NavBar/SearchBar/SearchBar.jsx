@@ -13,7 +13,6 @@ export const SearchBar = () => {
 
   const searchHandler = (e) =>{
     dispatch({type:"FILTER_BY_SEARCH", payload: e.target.value})
-    setSearchActive(true)
   }
 
   useEffect(()=>{

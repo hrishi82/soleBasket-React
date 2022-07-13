@@ -1,5 +1,5 @@
 import {Link, useNavigate} from "react-router-dom"
-import {useData} from "../../../context/dataContext"
+import {useData} from "../../../../context/dataContext"
 import "./collections.css"
 
 const CollectionCard = ({data}) => {
@@ -8,21 +8,24 @@ const CollectionCard = ({data}) => {
 
   const {dispatch} = useData()
 
+  const { collectionName, collectionCover, collectionDescription} = data
+
   function cardHandler(){
-    dispatch({type: "FILTER_BY_COLLECTION", payload: data})
+    dispatch({type: "CARD_FILTER_BY_COLLECTION", payload: collectionName})
   }
 
   return (
     <div className="collection-card">
       <div className="collection-card-img-box">
-        <img src="https://res.cloudinary.com/dac2rwutk/image/upload/v1647700886/nelson-ndongala-qMfrID95uJI-unsplash_spracq.jpg" alt="image" className="img-responsive" />
+        <img src={collectionCover} alt="image" className="img-responsive" />
+        {/* <img src="https://res.cloudinary.com/dac2rwutk/image/upload/v1647700886/nelson-ndongala-qMfrID95uJI-unsplash_spracq.jpg" alt="image" className="img-responsive" /> */}
       </div>
 
       <div className="collection-card-content">
         {/* <p className="collection-card-label">NEW ARRIVALS</p> */}
-        <h3 className="collection-card-title">{data}</h3>
+        <h3 className="collection-card-title">{collectionName}</h3>
         <p className="collection-card-details">
-          Check out this collection!
+          {collectionDescription}
         </p>
         <Link
           to="/productpage"

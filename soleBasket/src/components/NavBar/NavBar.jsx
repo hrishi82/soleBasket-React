@@ -4,6 +4,7 @@ import { SearchBar } from "./SearchBar/SearchBar";
 import { useData } from "../../context/dataContext";
 import { useAuth } from "../../context/authContext";
 import { useState, useEffect } from "react";
+import {CategoryBar} from "./CategoryBar/CategoryBar"
 
 const NavBar = () => {
   const { state, dispatch } = useData();
@@ -11,9 +12,11 @@ const NavBar = () => {
 
   const { token, setToken, setUser } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation()
 
   const [displaySearch, setDisplaySearch] = useState(false);
   const [toggleMobileSearch, setToggleMobileSearch] = useState(false);
+  const [toggleCategoryBar, setToggleCategoryBar] = useState(false);
 
   useEffect(() => {
     if (
@@ -24,6 +27,12 @@ const NavBar = () => {
       setDisplaySearch(false);
     } else {
       setDisplaySearch(true);
+    }
+
+    if(location.pathname === "/"){
+      setToggleCategoryBar(true)
+    }else{
+      setToggleCategoryBar(false)
     }
   }, [location.pathname]);
 
@@ -57,7 +66,10 @@ const NavBar = () => {
           <Link
             to="/productpage"
             className="nav-link nav-link-lg"
-            onClick={() => dispatch({ type: "FILTER_BY_SEARCH", payload: "" })}
+            onClick={() => {
+              dispatch({ type: "FILTER_BY_SEARCH", payload: "" })
+              dispatch({ type: "CLEAR_ALL_FILTERS" })
+            }}
           >
             All Products
           </Link>
@@ -107,7 +119,9 @@ const NavBar = () => {
         </nav>
       </nav>
       {toggleMobileSearch && <div className="mobile-search-master-container"><SearchBar /></div>}
+      {toggleCategoryBar && <div className="category-bar-master-container"><CategoryBar /></div>}
     </div>
+
   );
 };
 

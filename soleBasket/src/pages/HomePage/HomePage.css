@@ -1,29 +1,9 @@
-
-.header-gender-container{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin: 2rem 0 5rem 0; 
-    flex-wrap: wrap;
+.main-container{
+    max-width: 75rem;
+    padding: 1.5rem;
+    margin:auto;
 }
 
-.header-gender-wrapper-box{
-    margin: 1.5rem;
-}
-.gender-text{
-    box-sizing: border-box;
-    padding: 0.9rem 2rem;
-    overflow: hidden;
-    border-radius: 5rem;
-    border: 1px solid black;
-    text-align: center;
-    cursor: pointer;
-}
-
-.gender-text:hover  {
-    background-color: var(--text-default-clr);
-    color: var(--text-secondary-clr);
-}
 
 
 /******** Hero container ********/
@@ -54,7 +34,7 @@
     font-size: 3.5rem;
 }
 .hero-para{
-    color: var(--text-grey);
+    color: grey;
     font-weight: 400;
     font-size: 1.1rem;
     margin: 1rem 0;
