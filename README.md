@@ -25,9 +25,13 @@
 - Home Page
 - Product Listing Page
 - Filters
-- Cart Management
+- Search 
+- Cart Management 
 - Single Product Display Page
 - Wishlist Management
+- User Profile Page
+- Address Management
+- Checkout Page
 - Authentication
     - Signin
     - Signup
