@@ -1,6 +1,7 @@
 
 import { Link } from "react-router-dom";
 import {useData} from "../../../context/dataContext"
+import "./categorybar.css"
 
 const CategoryLinks = ({name}) =>{
 
@@ -11,22 +12,21 @@ const CategoryLinks = ({name}) =>{
   }
   
   return (
-  <div className="header-gender-wrapper-box">
-    <Link to="/productpage" className="link-no-decor gender-text" onClick={categoryHandler}>{name}</Link>
+  <div className="category-wrapper-box">
+    <Link to="/productpage" className="link-no-decor category-name" onClick={categoryHandler}>{name}</Link>
   </div>
   )
 }
 
-const Category = () => {
+export const CategoryBar = () => {
 
   const {state} = useData()
 
   return (
-    <section className="header-gender-container">
+    <section className="category-bar-container">
       {state.allCategories.map(el=><CategoryLinks key={el} name={el}/>)}
 
     </section>
   );
 };
 
-export { Category }

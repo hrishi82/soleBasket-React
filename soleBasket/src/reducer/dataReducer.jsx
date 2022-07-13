@@ -169,6 +169,21 @@ const dataReducerFunc = (state, action) => {
         };
       }
     }
+    case "CARD_FILTER_BY_COLLECTION": {
+      let res = state.filters.collections.includes(action.payload);
+
+      if (!res) {
+        return {
+          ...state,
+          filters: {
+            ...state.filters,
+            collections: action.payload,
+          },
+        };
+      }else{
+        return state
+      } 
+    }
 
     case "FILTER_BY_RATING": {
       return {

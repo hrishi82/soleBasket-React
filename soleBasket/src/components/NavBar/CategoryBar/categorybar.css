@@ -1,0 +1,15 @@
+.category-bar-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 50%;
+}
+
+.category-wrapper-box{
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0 1rem;
+}
+.category-wrapper-box .category-name:hover{
+    color: rgb(136, 136, 136);
+}

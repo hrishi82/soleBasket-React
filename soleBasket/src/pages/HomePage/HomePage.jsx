@@ -1,13 +1,17 @@
 import "./HomePage.css"
-import {Category} from "./Category/Category.jsx"
 import {HeroSection} from "./HeroSection.jsx"
-import {Collections} from "./Collections/Collections.jsx"
+import {Collections} from "./Components/Collections/Collections.jsx"
+import {TrendingHero} from "./Components/TrendingHero/TrendingHero.jsx"
+
+
 
 const HomePage = () => {
+
     return (
         <div className="main-container">
-            <Category/>
-            <HeroSection/>
+            <HeroSection />
+            <div className="section-gutter-md"></div>
+            <TrendingHero />
             <div className="section-gutter-md"></div>
             <Collections/>
         </div>
