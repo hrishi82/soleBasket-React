@@ -11,7 +11,7 @@ const CollectionCard = ({data}) => {
   const { collectionName, collectionCover, collectionDescription} = data
 
   function cardHandler(){
-    dispatch({type: "CARD_FILTER_BY_COLLECTION", payload: collectionName})
+    dispatch({type: "FILTER_BY_COLLECTION", payload: collectionName})
   }
 
   return (

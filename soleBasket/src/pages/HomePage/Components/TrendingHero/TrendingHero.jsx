@@ -24,7 +24,7 @@ export const TrendingHero = () =>{
         </section>
 
         <div className="header-btn-container text-center">
-            <Link to="/productpage" className="btn pill-btn pill-btn-lg btn-secondary" onClick={()=> dispatch({type: "CARD_FILTER_BY_COLLECTION", payload: "SUMMER"})}>Shop Now</Link>
+            <Link to="/productpage" className="btn pill-btn pill-btn-lg btn-secondary" onClick={()=> dispatch({type: "FILTER_BY_COLLECTION", payload: "SUMMER"})}>Shop Now</Link>
         </div>
 
     </section>
