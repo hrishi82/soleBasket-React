@@ -46,7 +46,7 @@ export const SingleProductPage = () => {
       return;
     }
 
-    if (e.target.innerText === "Go To Cart") {
+    if (e.target.innerText === "GO TO CART") {
       navigate("/cartpage");
       return;
     }
