@@ -34,6 +34,9 @@
 }
 
 
+
+
+
 @media screen and (max-width:1300px){
     .products-container-content{
         grid-template-columns: 1fr 1fr 1fr;
