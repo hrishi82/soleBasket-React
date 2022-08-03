@@ -77,7 +77,19 @@ export const SignupPage = () => {
       }
       
     }
-  
+  const dummySignpup = () =>{
+    const dummySignupData = {firstName: 'Hrishikesh',
+    lastName: 'Barman', email: "hrishi@gmail.com", password: "12345"}
+
+    const {firstName, lastName, email, password} = dummySignupData
+
+    try{
+      signupUser(firstName, lastName, email, password);
+    }catch(err){
+      console.log(err)
+    }
+
+  }
 
   return (
     <div className="auth-page-container">
@@ -131,8 +143,9 @@ export const SignupPage = () => {
           </div>
         </div>
 
-        <div className="auth-form-btn-container">
-          <button className="btn btn-primary" onClick={(e)=>formHandler(e)}>Create New Account</button>
+        <div className="auth-form-btn-container auth-form-signup-btn-container">
+          <button className="btn btn-primary authform-signup-btn" onClick={(e)=>formHandler(e)}>Create New Account</button>
+          <button className="btn btn-secondary authform-signup-btn" onClick={dummySignpup}>Autofill data and Signup</button>
         </div>
 
         <div className="text-center auth-action-signup-link-cont">
