@@ -32,6 +32,7 @@ export const AddressModal = () => {
         setErrorMsg("Please provide proper details");
       }
     } else {
+      setErrorMsg("");
       dispatch({ type: "EDIT_ADDRESS", payload: formData });
       dispatch({ type: "RESET_ADDRESS" });
       dispatch({ type: "TOGGLE_ADDRESS_MODAL" });
