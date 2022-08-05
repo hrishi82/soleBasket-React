@@ -8,6 +8,12 @@ import "./checkout.css";
 export const CheckoutPage = () => {
   const { state, dispatch } = useData();
 
+  const [addressListData, setAddressListData] = useState(state.allAddresses)
+
+  useEffect(()=>{
+    setAddressListData(state.allAddresses)
+  }, [state.allAddresses])
+
   return (
     <>
       <AddressModal />
@@ -21,7 +27,7 @@ export const CheckoutPage = () => {
       <div className="checkout-pg-master-container">
         <div className="checkput-pg-address-container">
           <h2 className="text-center">Address Selection</h2>
-          {state.allAddresses.map((el) => {
+          {addressListData.map((el) => {
             return (
               <div
                 className="checkout-pg-address-selection-card-wrapper"
