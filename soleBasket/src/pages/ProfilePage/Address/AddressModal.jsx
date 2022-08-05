@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
 import { useData } from "../../../context/dataContext";
+import { createRandomAddress } from "../../../utils/utils";
 
 export const AddressModal = () => {
   const { state, dispatch } = useData();
@@ -10,11 +11,15 @@ export const AddressModal = () => {
   const [formData, setFormData] = useState(addressFormData);
   const [errorMsg, setErrorMsg] = useState("");
 
+
+  const fakeRandomAddress = createRandomAddress();
+
   useEffect(() => {
     setFormData(addressFormData);
-  }, [addressFormData]);
+  }, [state]);
 
   const formSubmitHandler = (e) => {
+    console.log(e)
     e.preventDefault();
     if (formData.id === "") {
       if (
@@ -40,10 +45,11 @@ export const AddressModal = () => {
   };
 
   const dummyAddressHandler = () => {
+    setErrorMsg("");
     const dummyData = {
       id: uuid(),
-      name: "Anuj Kumar",
-      address: "DLF Heights, Electronic city",
+      name: fakeRandomAddress.name,
+      address: fakeRandomAddress.address,
       mobile: "123456789",
       pincode: "560105",
       city: "Bangalore",
@@ -52,6 +58,7 @@ export const AddressModal = () => {
     dispatch({ type: "ADD_ADDRESS", payload: dummyData });
     dispatch({ type: "RESET_ADDRESS" });
     dispatch({ type: "TOGGLE_ADDRESS_MODAL" });
+    
   };
 
   const handleFormData = (e) => {
@@ -64,99 +71,99 @@ export const AddressModal = () => {
         state.displayAddressModal ? "viewModal" : null
       }`}
     >
-        <form onSubmit={(e) => formSubmitHandler(e)}>
-          <div className="address-card">
-            <section className="address-card-body-container">
-              {errorMsg !== "" ? (
-                <div className="address-card-input-wrapper address-input-error-cont text-center">
-                  {errorMsg}
-                </div>
-              ) : null}
+      <form onSubmit={(e) => formSubmitHandler(e)}>
+        <div className="address-card">
+          <section className="address-card-body-container">
+            {errorMsg !== "" ? (
+              <div className="address-card-input-wrapper address-input-error-cont text-center">
+                {errorMsg}
+              </div>
+            ) : null}
+            <div className="address-card-input-wrapper">
+              <label>Name</label>
+              <input
+                className="address-card-input-txt"
+                type="text"
+                name="name"
+                value={formData?.name}
+                onChange={(e) => handleFormData(e)}
+              />
+            </div>
+            <div className="address-card-input-wrapper">
+              <label>Address</label>
+              <input
+                className="address-card-input-txt"
+                type="text"
+                name="address"
+                value={formData?.address}
+                onChange={(e) => handleFormData(e)}
+              />
+            </div>
+
+            <div className="address-card-field-splitter-container">
               <div className="address-card-input-wrapper">
-                <label>Name</label>
+                <label>Mobile No.</label>
                 <input
                   className="address-card-input-txt"
-                  type="text"
-                  name="name"
-                  value={formData?.name}
+                  type="number"
+                  name="mobile"
+                  value={formData?.mobile}
                   onChange={(e) => handleFormData(e)}
                 />
               </div>
               <div className="address-card-input-wrapper">
-                <label>Address</label>
+                <label>Pincode</label>
                 <input
                   className="address-card-input-txt"
-                  type="text"
-                  name="address"
-                  value={formData?.address}
+                  type="number"
+                  name="pincode"
+                  value={formData?.pincode}
                   onChange={(e) => handleFormData(e)}
                 />
               </div>
+            </div>
 
-              <div className="address-card-field-splitter-container">
-                <div className="address-card-input-wrapper">
-                  <label>Mobile No.</label>
-                  <input
-                    className="address-card-input-txt"
-                    type="number"
-                    name="mobile"
-                    value={formData?.mobile}
-                    onChange={(e) => handleFormData(e)}
-                  />
-                </div>
-                <div className="address-card-input-wrapper">
-                  <label>Pincode</label>
-                  <input
-                    className="address-card-input-txt"
-                    type="number"
-                    name="pincode"
-                    value={formData?.pincode}
-                    onChange={(e) => handleFormData(e)}
-                  />
-                </div>
+            <div className="address-card-field-splitter-container">
+              <div className="address-card-input-wrapper">
+                <label>City</label>
+                <input
+                  className="address-card-input-txt"
+                  type="text"
+                  name="city"
+                  value={formData?.city}
+                  onChange={(e) => handleFormData(e)}
+                />
               </div>
-
-              <div className="address-card-field-splitter-container">
-                <div className="address-card-input-wrapper">
-                  <label>City</label>
-                  <input
-                    className="address-card-input-txt"
-                    type="text"
-                    name="city"
-                    value={formData?.city}
-                    onChange={(e) => handleFormData(e)}
-                  />
-                </div>
-                <div className="address-card-input-wrapper">
-                  <label>State</label>
-                  <input
-                    className="address-card-input-txt"
-                    type="text"
-                    name="state"
-                    value={formData?.state}
-                    onChange={(e) => handleFormData(e)}
-                  />
-                </div>
+              <div className="address-card-input-wrapper">
+                <label>State</label>
+                <input
+                  className="address-card-input-txt"
+                  type="text"
+                  name="state"
+                  value={formData?.state}
+                  onChange={(e) => handleFormData(e)}
+                />
               </div>
-            </section>
+            </div>
+          </section>
 
-            <section className="address-card-footer-container">
-              <button
-                className="btn outline-secondary-btn card-btn"
-                type="submit"
-              >
-                Add Address
-              </button>
-              <button
-          className="btn btn-secondary card-btn"
-          onClick={dummyAddressHandler}
-        >
-          Auto-fill with dummy address
-        </button>
-            </section>
-          </div>
-        </form>
-
+          <section className="address-card-footer-container">
+            <button
+              className="btn outline-secondary-btn card-btn"
+              type="submit"
+            >
+              Add Address
+            </button>
+            <button
+              type="button"
+              className="btn btn-secondary card-btn"
+              onClick={dummyAddressHandler}
+            >
+              Auto-fill with dummy address
+            </button>
+          </section>
+        </div>
+      </form>
     </div>
   );
 };

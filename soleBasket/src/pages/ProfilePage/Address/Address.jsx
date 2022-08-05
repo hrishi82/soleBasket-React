@@ -1,15 +1,15 @@
 import "./address.css";
 import { useData } from "../../../context/dataContext";
 import { AddressCard } from "./AddressCard";
-import {AddressModal} from "./AddressModal"
+import { AddressModal } from "./AddressModal";
 
 export const Address = () => {
   const { state, dispatch } = useData();
   return (
     <div>
-        <AddressModal />
-        <div
-        onClick={()=>dispatch({type:"TOGGLE_ADDRESS_MODAL"})}
+      <AddressModal />
+      <div
+        onClick={() => dispatch({ type: "TOGGLE_ADDRESS_MODAL" })}
         className={`addressmodal-bg-master-wrapper ${
           state.displayAddressModal ? "viewModal" : null
         }`}
@@ -21,7 +21,15 @@ export const Address = () => {
           <AddressCard key={el?.id} data={el} />
         ))}
       </div>
-      <button className="btn outline-secondary-btn card-btn" onClick={()=> dispatch({type:"TOGGLE_ADDRESS_MODAL"})}>Add new address</button>
+      <button
+        className="btn outline-secondary-btn card-btn"
+        onClick={() => {
+          dispatch({ type: "TOGGLE_ADDRESS_MODAL" });
+          dispatch({ type: "RESET_ADDRESS" });
+        }}
+      >
+        Add new address
+      </button>
     </div>
   );
 };

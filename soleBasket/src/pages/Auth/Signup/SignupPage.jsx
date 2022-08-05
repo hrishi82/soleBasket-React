@@ -3,17 +3,20 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/authContext";
 import { useData } from "../../../context/dataContext";
 import {validateEmail, validatePassword} from "../../../utils/authUtils"
+import {createRandomUser} from "../../../utils/utils"
 
 export const SignupPage = () => {
 
-    const [signupForm, setSignupForm] = useState({firstName: '',
-    lastName: '', email: "", password: ""})
+    const [signupForm, setSignupForm] = useState({name: '', email: "", password: ""})
     const [authInputError, setAuthInputError] = useState({ email: "", password: "", errorMessage: "" });
 
 
     const {dispatch} = useData()
     const { token, signupUser } = useAuth();
     const navigate = useNavigate();
+
+    const fakesignupdata = createRandomUser()
+
 
     useEffect(() => {
       let id;
@@ -28,11 +31,11 @@ export const SignupPage = () => {
     function formHandler(e){
         e.preventDefault()
 
-        const {firstName, lastName, email, password} = signupForm
+        const {name, email, password} = signupForm
         try{
-          if (email && password && firstName && lastName !== '') {
+          if (email && password && name !== '') {
             (async () => {
-              signupUser(firstName, lastName, email, password);
+              signupUser(email, password, name, );
             })();
           }else{
             setAuthInputError({...authInputError, errorMessage: "Please provide proper input"})
@@ -70,26 +73,28 @@ export const SignupPage = () => {
         } else {
           setAuthInputError({ ...authInputError, password: '' });
         }
-      }else if(e.target.name=== "firstname"){
-        setSignupForm({...signupForm, firstName: e.target.value})
-      }else if(e.target.name=== "lastname"){
-        setSignupForm({...signupForm, lastName: e.target.value})
+      }else if(e.target.name=== "name"){
+        setSignupForm({...signupForm, name: e.target.value})
       }
       
     }
-  const dummySignpup = () =>{
-    const dummySignupData = {firstName: 'Hrishikesh',
-    lastName: 'Barman', email: "hrishi@gmail.com", password: "12345"}
 
-    const {firstName, lastName, email, password} = dummySignupData
+  const dummySignpup = () =>{
+    const dummySignupData = {email: fakesignupdata.email, password: fakesignupdata.password, name: fakesignupdata.name}
+
+    const {email, password, name } = dummySignupData
+
+    console.log(dummySignupData)
 
     try{
-      signupUser(firstName, lastName, email, password);
+      signupUser(email, password, name );
     }catch(err){
       console.log(err)
     }
 
   }
+
+  
 
   return (
     <div className="auth-page-container">
@@ -105,13 +110,8 @@ export const SignupPage = () => {
               ) : null}
 
         <div className="input">
-          <label>First Name</label>
-          <input className="input-txt" type="name" name="firstname" value={signupForm.firstName} onChange={(e)=>credentialHandler(e)} />
-        </div>  
-
-        <div className="input">
-          <label>Last Name</label>
-          <input className="input-txt" type="name" name="lastname" value={signupForm.lastName} onChange={(e)=>credentialHandler(e)} />
+          <label>Name</label>
+          <input className="input-txt" type="name" name="name" value={signupForm.name} onChange={(e)=>credentialHandler(e)} />
         </div>  
 
         <div className="input">

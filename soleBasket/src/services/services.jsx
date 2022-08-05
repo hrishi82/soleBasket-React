@@ -8,13 +8,11 @@ export const loginServices = async (email, password) =>
   });
 
 
-  export const SignupServices = async ({   firstName,
-    lastName, email, password }) =>
+  export const SignupServices = async ({ email, password, name }) =>
   await axios.post('/api/auth/signup', {
-    firstName,
-    lastName,
     email,
-    password
+    password,
+    name
   });
 
 export const GetData = async () => axios.get("/api/products");

@@ -13,7 +13,6 @@ export const validateMobileNo = (input) => {
     );
   };
   export const validatePassword = (input) => {
-    console.log(input)
     return /^(?=.{8,20}$)\D*\d/.test(input);
   };
   
