@@ -3,5 +3,8 @@
     "axios": "^0.26.1",
     "react-lazy-load-image-component": "^1.5.4",
     "react-toastify": "^9.0.5"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.3.0"
   }
 }
