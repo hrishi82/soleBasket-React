@@ -59,7 +59,16 @@
     font-size: 0.8rem;
     display: flex;
     align-items: center;
+    cursor: pointer;
 
+}
+.filter-radio > input{
+    width: 1.2rem;
+    height: 1.2rem;
+    cursor: pointer;
+}
+.filter-radio > label{
+    cursor: pointer;
 }
 
 .price-slider-container{
@@ -101,6 +110,11 @@
     margin: 2rem 0;
 }
 
+
+.filter-close-btn-wrapper{
+    width: 100%;
+    text-align: right;
+}
 
 
 @media screen and (max-width:900px){

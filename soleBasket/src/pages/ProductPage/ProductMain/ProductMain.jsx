@@ -3,6 +3,7 @@ import { useFilterHook } from "../../../hooks/useFilterHook";
 import { useData } from "../../../context/dataContext";
 import { ProductAside } from "../ProductAside/ProductAside";
 import "../ProductAside/productaside.css";
+import "./productmain.css"
 
 const ProductMain = () => {
   const { filteredData } = useFilterHook();
@@ -43,6 +44,10 @@ const ProductMain = () => {
             return <ProductCard key={el?._id} data={el} />;
           })}
         </div>
+        {/* <div className="scroll-to-top-container">
+          <button className="scroll-to-top-btn">Scroll to top</button>
+        </div>
+         */}
       </section>
     </>
   );
