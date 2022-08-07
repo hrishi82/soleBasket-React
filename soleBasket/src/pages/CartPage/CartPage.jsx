@@ -14,7 +14,7 @@ export const CartPage = () => {
   }, [cartlist]);
 
   const EmptyCart = () => {
-    return <h2>Empty Cart! Add items to continue</h2>;
+    return <h2 className="text-center">Empty Cart! Add items to continue</h2>;
   };
 
   const CartContent = () => {

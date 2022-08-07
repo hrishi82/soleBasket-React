@@ -7,7 +7,7 @@ import {createRandomUser} from "../../../utils/utils"
 
 export const SignupPage = () => {
 
-    const [signupForm, setSignupForm] = useState({name: '', email: "", password: ""})
+    const [signupForm, setSignupForm] = useState({name: '', email: "", password: "", termsConditions: false})
     const [authInputError, setAuthInputError] = useState({ email: "", password: "", errorMessage: "" });
 
 
@@ -31,15 +31,19 @@ export const SignupPage = () => {
     function formHandler(e){
         e.preventDefault()
 
-        const {name, email, password} = signupForm
+        const {name, email, password, termsConditions} = signupForm
         try{
-          if (email && password && name !== '') {
+          if (email && password && name !== '' && termsConditions) {
             (async () => {
               signupUser(email, password, name, );
             })();
+          }else if((email && password && name !== '' && !termsConditions)){
+            setAuthInputError({...authInputError, errorMessage: "Please accept terms and conditions"})
           }else{
             setAuthInputError({...authInputError, errorMessage: "Please provide proper input"})
           }
+
+          
         }catch(err){
           console.log(err)
         }
@@ -75,6 +79,8 @@ export const SignupPage = () => {
         }
       }else if(e.target.name=== "name"){
         setSignupForm({...signupForm, name: e.target.value})
+      }else if(e.target.name=== "termsAndConditions"){
+        setSignupForm({...signupForm, termsConditions: !signupForm.termsConditions})
       }
       
     }
@@ -136,7 +142,7 @@ export const SignupPage = () => {
 
         <div className="input input-flex-cont">
           <div className="input-condition-cont">
-            <input type="checkbox" className="input-checkbox" />
+            <input type="checkbox" className="input-checkbox" name="termsAndConditions" onClick={(e)=>credentialHandler(e)} />
             <p className="text spacing-sm">
               I accept all the Terms & Conditions
             </p>
@@ -145,7 +151,7 @@ export const SignupPage = () => {
 
         <div className="auth-form-btn-container auth-form-signup-btn-container">
           <button className="btn btn-primary authform-signup-btn" onClick={(e)=>formHandler(e)}>Create New Account</button>
-          <button className="btn btn-secondary authform-signup-btn" onClick={dummySignpup}>Autofill data and Signup</button>
+          <button className="btn btn-secondary authform-signup-btn" onClick={dummySignpup}>Autofill and Signup</button>
         </div>
 
         <div className="text-center auth-action-signup-link-cont">
