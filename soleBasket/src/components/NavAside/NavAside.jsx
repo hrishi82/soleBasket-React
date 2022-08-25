@@ -19,6 +19,10 @@ export const NavAside = () => {
       type: "SET_CART_LIST",
       payload: [],
     });
+    dispatch({
+      type: "SET_WISH_LIST",
+      payload: [],
+    });
     dispatch({ type: "TOGGLE_NAV_SIDEBAR" })
   };
 

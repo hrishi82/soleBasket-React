@@ -90,8 +90,6 @@ export const SignupPage = () => {
 
     const {email, password, name } = dummySignupData
 
-    console.log(dummySignupData)
-
     try{
       signupUser(email, password, name );
     }catch(err){

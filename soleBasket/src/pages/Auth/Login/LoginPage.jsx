@@ -5,6 +5,7 @@ import { useAuth } from "../../../context/authContext";
 import { useData } from "../../../context/dataContext";
 import { loginServices } from "../../../services/services";
 import {validateEmail} from "../../../utils/authUtils"
+import {GetCartItems, GetWishlistItems } from "../../../services/services"
 
 const LoginPage = () => {
   const { token, setToken, user, setUser } = useAuth();
@@ -48,6 +49,22 @@ const LoginPage = () => {
             user: response.data.foundUser,
           })
         );
+
+        const cartResp = await GetCartItems({ encodedToken: response.data.encodedToken });
+        if (cartResp.status === 200 || cartResp.status === 201) {
+            dispatch({
+            type: "SET_CART_LIST",
+            payload: cartResp.data.cart,
+            });
+        }
+
+        const wishResp = await GetWishlistItems({ encodedToken: response.data.encodedToken });
+        if (wishResp.status === 200 || wishResp.status === 201) {
+            dispatch({
+            type: "SET_WISH_LIST",
+            payload: wishResp.data.wishlist ,
+            });
+        }
 
         setUser(response.data.foundUser);
         setToken(response.data.encodedToken);

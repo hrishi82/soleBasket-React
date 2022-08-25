@@ -24,13 +24,30 @@ const DataProvider = ({ children }) => {
                 if (productResult.status === 200 || productResult.status === 201){
                     dispatch({type: 'ALL_PRODUCTS_DATA_FROM_SERVER', payload: productResult.data.products})
                 }
+
+                let cartResp = await GetCartItems({ encodedToken: token });
+                if (cartResp.status === 200 || cartResp.status === 201) {
+                    dispatch({
+                    type: "SET_CART_LIST",
+                    payload: cartResp.data.cart,
+                    });
+                }
+
+                let wishResp = await GetWishlistItems({ encodedToken: token });
+                if (wishResp.status === 200 || wishResp.status === 201) {
+                    dispatch({
+                    type: "SET_WISH_LIST",
+                    payload: wishResp.data.wishlist ,
+                    });
+                }
+
                 setLoader(false)
             }catch(err){
                 console.log(err)
             }
         })();
         
-    }, [token])
+    }, [])
 
   return <DataContext.Provider value={{state, dispatch, loader, removeLoader}}>{children}</DataContext.Provider>;
 };
