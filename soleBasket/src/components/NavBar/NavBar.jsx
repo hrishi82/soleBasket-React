@@ -45,6 +45,10 @@ const NavBar = () => {
       type: "SET_CART_LIST",
       payload: [],
     });
+    dispatch({
+      type: "SET_WISH_LIST",
+      payload: [],
+    });
   };
 
   const toggleSidebar = () => {};
